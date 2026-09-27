@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#166534">
+  <meta name="description" content="A three-level Bahasa Melayu vocabulary game for Malaysian Year 4 SJK pupils.">
+  <title>Kapi BM · Tahun 4</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23facc15'/%3E%3Ccircle cx='32' cy='34' r='21' fill='%23a16207'/%3E%3Ccircle cx='18' cy='20' r='8' fill='%23783f13'/%3E%3Ccircle cx='46' cy='20' r='8' fill='%23783f13'/%3E%3Ccircle cx='24' cy='31' r='3' fill='%231c1917'/%3E%3Ccircle cx='40' cy='31' r='3' fill='%231c1917'/%3E%3Cellipse cx='32' cy='42' rx='12' ry='8' fill='%23c08457'/%3E%3Ccircle cx='32' cy='39' r='3' fill='%23451a03'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="game-shell">
+    <header class="game-header" aria-label="Game progress">
+      <div class="brand"><span class="brand-mark">K</span><span>Kapi BM</span></div>
+      <div class="progress-block">
+        <div class="progress-meta"><span id="progressLabel">Level 1 · Soalan 1 daripada 10</span><span id="progressPercent">10%</span></div>
+        <div class="progress-track" role="progressbar" aria-label="Question progress" aria-valuemin="0" aria-valuemax="10" aria-valuenow="1">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button class="header-button" id="menuButton" type="button" aria-label="Return to main menu"><span aria-hidden="true">⌂</span><span>Menu</span></button>
+        <button class="header-button" id="backButton" type="button" aria-label="Go back to the previous question" disabled><span aria-hidden="true">←</span><span>Back</span></button>
+        <button class="header-button" id="summaryButton" type="button" aria-label="Open learning summary"><span aria-hidden="true">▤</span><span>Summary</span></button>
+        <div class="score-pill" aria-live="polite" aria-label="Current score"><span aria-hidden="true">★</span><span id="score">0</span></div>
+      </div>
+    </header>
+
+    <section class="menu-screen" id="menuScreen" aria-labelledby="menuTitle">
+      <div class="menu-intro">
+        <div>
+          <span class="eyebrow">Bahasa Melayu · Tahun 4 SJK</span>
+          <h1 id="menuTitle">Belajar bersama Kapi</h1>
+          <p>Build your vocabulary from simple meanings to challenging textbook contexts.</p>
+          <div class="menu-progress"><strong id="unlockedCount">1 of 3 levels unlocked</strong><span>Complete each level to unlock the next challenge.</span></div>
+        </div>
+        <img src="assets/kapi.png" alt="Kapi the capybara welcoming the learner" class="menu-mascot">
+      </div>
+      <div class="level-menu" id="levelMenu">
+        <article class="menu-level" data-level-card="1">
+          <div class="menu-level-number">1</div>
+          <div class="menu-level-copy"><span class="difficulty">Beginner</span><h2>Word meanings</h2><p>Match 10 textbook words with their English meanings.</p></div>
+          <button class="menu-level-button" type="button" data-start-level="1">Start Level 1</button>
+        </article>
+        <article class="menu-level" data-level-card="2">
+          <div class="menu-level-number">2</div>
+          <div class="menu-level-copy"><span class="difficulty">Intermediate</span><h2>Sentence challenge</h2><p>Use context to complete harder Bahasa Melayu sentences.</p></div>
+          <button class="menu-level-button" type="button" data-start-level="2">Start Level 2</button>
+        </article>
+        <article class="menu-level" data-level-card="3">
+          <div class="menu-level-number">3</div>
+          <div class="menu-level-copy"><span class="difficulty">Advanced</span><h2>Context mastery</h2><p>Infer precise vocabulary through translation and longer clues.</p></div>
+          <button class="menu-level-button" type="button" data-start-level="3">Start Level 3</button>
+        </article>
+      </div>
+    </section>
+
+    <section class="lesson" id="lesson" aria-labelledby="questionText" hidden>
+      <aside class="coach-panel">
+        <div class="mascot-stage">
+          <span class="sun-dot sun-dot-one"></span>
+          <span class="sun-dot sun-dot-two"></span>
+          <img src="assets/kapi.png" alt="Kapi, a smiling capybara holding a green book" class="mascot">
+        </div>
+        <div class="coach-copy">
+          <span class="eyebrow">Tahun 4 · Kosa Kata</span>
+          <p id="kapiMessage">Hai! Let’s learn one word at a time.</p>
+        </div>
+      </aside>
+
+      <div class="quiz-panel">
+        <div class="source-row">
+          <div class="lesson-tags"><span id="levelChip" class="level-chip">Level 1</span><span id="themeChip" class="theme-chip">Tema 3 · Keselamatan</span></div>
+          <span id="pageRef" class="page-ref">Buku teks m.s. 45</span>
+        </div>
+
+        <div class="question-area">
+          <p class="instruction" id="instruction">What does this Bahasa Melayu word mean?</p>
+          <div class="word-row">
+            <h1 id="questionText">cermat</h1>
+            <button class="listen-button" id="listenButton" type="button" aria-label="Listen to cermat">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6.5 9H3v6h3.5l4.5 4V5Zm4.3 3.2a5 5 0 0 1 0 7.6M18 5a9 9 0 0 1 0 14"/></svg>
+              <span>Dengar</span>
+            </button>
+          </div>
+          <p class="hint" id="hint">Listen, think, then choose the best answer.</p>
+        </div>
+
+        <div class="answers" id="answers" aria-label="Answer choices"></div>
+
+        <div class="feedback" id="feedback" aria-live="polite" hidden>
+          <div class="feedback-icon" id="feedbackIcon" aria-hidden="true">✓</div>
+          <div>
+            <strong id="feedbackTitle">Betul! Correct.</strong>
+            <p id="feedbackText"></p>
+          </div>
+        </div>
+
+        <button class="next-button" id="nextButton" type="button" disabled>Check answer</button>
+      </div>
+    </section>
+
+    <section class="result-screen" id="resultScreen" hidden aria-labelledby="resultTitle">
+      <div class="result-burst" aria-hidden="true">★</div>
+      <img src="assets/kapi.png" alt="Kapi the capybara celebrating" class="result-mascot">
+      <span class="eyebrow" id="resultEyebrow">Level 1 complete</span>
+      <h1 id="resultTitle">Hebat! Level 1 complete.</h1>
+      <p id="resultMessage">Kapi is proud of your Bahasa Melayu progress.</p>
+      <div class="result-score"><strong id="finalScore">0/10</strong><span id="resultScoreLabel">correct in this level</span></div>
+      <div class="level-path" aria-label="Level progress">
+        <div class="level-node" id="levelOneNode"><span>1</span><div><strong>Level 1</strong><small>Word meanings</small></div></div>
+        <div class="level-connector" id="levelConnectorOne"></div>
+        <div class="level-node" id="levelTwoNode"><span>2</span><div><strong>Level 2</strong><small>Sentence challenge</small></div></div>
+        <div class="level-connector" id="levelConnectorTwo"></div>
+        <div class="level-node" id="levelThreeNode"><span>3</span><div><strong>Level 3</strong><small>Context mastery</small></div></div>
+      </div>
+      <div class="result-actions">
+        <button class="restart-button" id="resultActionButton" type="button">Unlock Level 2 →</button>
+        <a class="source-link" href="https://online.anyflip.com/wsxju/jgpv/mobile/index.html" target="_blank" rel="noreferrer">Open textbook source</a>
+      </div>
+    </section>
+
+    <footer>
+      Vocabulary selected from <cite>Bahasa Melayu Tahun 4 Sekolah Jenis Kebangsaan</cite>. English is used as learning support.
+    </footer>
+  </main>
+
+  <dialog class="summary-dialog" id="summaryDialog" aria-labelledby="summaryTitle">
+    <div class="summary-heading">
+      <div>
+        <span class="eyebrow">Kemajuan saya</span>
+        <h2 id="summaryTitle">Learning summary</h2>
+      </div>
+      <button class="dialog-close" id="closeSummaryButton" type="button" aria-label="Close summary">×</button>
+    </div>
+    <div class="summary-stats">
+      <div><strong id="summaryAnswered">0</strong><span>answered</span></div>
+      <div><strong id="summaryCorrect">0</strong><span>correct</span></div>
+      <div><strong id="summaryRemaining">30</strong><span>remaining</span></div>
+    </div>
+    <div class="summary-list-heading"><strong>Vocabulary progress</strong><span id="summaryEncouragement">Start with your first word!</span></div>
+    <div class="summary-words" id="summaryWords"></div>
+    <button class="dialog-done" id="dialogDoneButton" type="button">Continue learning</button>
+  </dialog>
+
+  <div class="confetti" id="confetti" aria-hidden="true"></div>
+  <script src="app.js"></script>
+</body>
+</html>
